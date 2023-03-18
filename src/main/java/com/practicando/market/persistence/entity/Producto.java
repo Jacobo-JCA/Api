@@ -2,6 +2,8 @@ package com.practicando.market.persistence.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "productos")
 public class Producto {
@@ -18,7 +20,7 @@ public class Producto {
     private Integer idCategoria;
 
     @Column(name = "codigo_barras")
-    private Integer codigoBarras;
+    private String codigoBarras;
 
     @Column(name = "precio_venta")
     private Double precioVenta;
@@ -32,6 +34,8 @@ public class Producto {
     @JoinColumn(name = "id_categoria", insertable = false, updatable = false)
     private Categoria categoria;
 
+    @OneToMany(mappedBy = "producto")
+    private List<ComprasProducto> comprasProductos;
     public Integer getIdProducto() {
         return idProducto;
     }
@@ -56,11 +60,11 @@ public class Producto {
         this.idCategoria = idCategoria;
     }
 
-    public Integer getCodigoBarras() {
+    public String getCodigoBarras() {
         return codigoBarras;
     }
 
-    public void setCodigoBarras(Integer codigoBarras) {
+    public void setCodigoBarras(String codigoBarras) {
         this.codigoBarras = codigoBarras;
     }
 
@@ -94,5 +98,13 @@ public class Producto {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public List<ComprasProducto> getComprasProductos() {
+        return comprasProductos;
+    }
+
+    public void setComprasProductos(List<ComprasProducto> comprasProductos) {
+        this.comprasProductos = comprasProductos;
     }
 }
